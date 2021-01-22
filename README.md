@@ -1,3 +1,20 @@
+# Leather E-Commerce Store Back End
+
+## User Stories
+
+### Owner Stories
+```
+- As the owner, I want to have an admin account, so I can update and manage my listings.
+- As the owner, I want customers to leave product reviews, so other customers can see how good my products are.
+```
+
+### Site Visitor Stories
+```
+- As a customer, I want to be able to add items to my cart, so I can checkout in one go.
+- As a customer, I want to browse by category, so I can weigh all my options easily.
+- As a customer, I want to login using my email, so I do not need to remember my username. 
+```
+
 # Adonis fullstack application
 
 This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
