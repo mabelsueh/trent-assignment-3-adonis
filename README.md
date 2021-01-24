@@ -17,7 +17,12 @@
 
 ## Diagrams
 
+### ERD Diagram:
 ![alt text](documentation/erd.png)
+
+### Logical Schema
+
+![alt text](documentation/ls.png)
 
 # Adonis fullstack application
 
