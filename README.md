@@ -15,6 +15,10 @@
 - As a customer, I want to login using my email, so I do not need to remember my username. 
 ```
 
+## Diagrams
+
+![alt text](documentation/erd.png)
+
 # Adonis fullstack application
 
 This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
