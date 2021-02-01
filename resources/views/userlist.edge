@@ -1,0 +1,10 @@
+@layout('base')
+
+@section('content')
+<h1>{{title}}</h1>
+<ul>
+  @each(user in users)
+    <li>{{user.email}}</li>
+  @endeach
+</ul>
+@endsection
