@@ -17,11 +17,16 @@
 const Route = use('Route')
 const User = use('App/Models/User')
 
-Route.on('/').render('welcome')
+Route.on('/').render('home')
 
 // user routes
 // test controller
 Route.get('/users', 'UserController.index')
+// .middleware('auth:user')
+
+
+// product routes
+Route.get('products', 'ProductController.index')
 
 
 
