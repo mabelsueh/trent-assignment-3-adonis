@@ -21,12 +21,12 @@ User List
   <tbody>
     <tr>
       @each(user in users)
-      <th scope="row">{{user.id}}</th>
-      <td>{{user.first_name}}</td>
-      <td>{{user.last_name}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.contact}}</td>
-      <td>{{user.password}}</td>
+      <th scope="row" class="align-middle">{{user.id}}</th>
+      <td class="align-middle">{{user.first_name}}</td>
+      <td class="align-middle">{{user.last_name}}</td>
+      <td class="align-middle">{{user.email}}</td>
+      <td class="align-middle">{{user.contact}}</td>
+      <td class="align-middle">{{user.password}}</td>
       <td><button class="btn btn-warning btn-block">Edit</button></td>
       <td><button class="btn btn-danger btn-block">Del</button></td>
     </tr>

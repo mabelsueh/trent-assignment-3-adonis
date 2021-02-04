@@ -1,0 +1,30 @@
+@layout('base')
+{{ style('css.admin-style') }}
+
+@section('title')
+Admin Login
+@endsection
+
+@section('content')
+<div class="container">
+  <h1 class="mb-7">Admin Login</h1>
+{{--  flash message for error  --}}
+  @if(flashMessage('warning'))
+      <div class="alert alert-danger">{{ flashMessage('warning') }}</div>
+    @endif
+
+     <form method="POST">
+        {{--  action="/home"  --}}
+      {{csrfField()}}
+      <div class="form-group">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+@endsection

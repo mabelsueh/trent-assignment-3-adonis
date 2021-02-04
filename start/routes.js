@@ -15,27 +15,41 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-const User = use('App/Models/User')
+// should be can delete the line below
+// const User = use('App/Models/User')
 
-Route.on('/').render('home')
+Route.on('/').render('admin/login')
+
+// paul routes
+Route.get('/admin/register', 'AdminController.register')
+Route.post('/admin/register', 'AdminController.processRegister')
+Route.get('/admin/login', 'AdminController.login');
+Route.post('/admin/login', 'AdminController.processLogin');
+Route.get('/admin/show', 'AdminController.show')
+
+
+// login routes;
+// Route.post('/home', 'UserController.home')
+// .middleware('auth:admin')
 
 // user routes
 // test controller
-Route.get('/users', 'UserController.index')
-// .middleware('auth:user')
+// Route.get('/users', 'AdminController.index')
+// .middleware('auth:admin')
 
 
 // product routes
-Route.get('products', 'ProductController.index')
+// Route.get('products', 'ProductController.index')
+// .middleware('auth:admin')
 
 
 
 
 
 // render edge file on route
-Route.on('/home').render('home')
+// Route.on('/home').render('home')
 
 // render message on :id
-Route.get('/user/:id', ({params}) => {
-  return `The ID number is: ${params.id}`
-})
+// Route.get('/user/:id', ({params}) => {
+//   return `The ID number is: ${params.id}`
+// })

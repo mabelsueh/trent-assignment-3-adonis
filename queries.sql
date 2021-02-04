@@ -10,3 +10,6 @@ WHERE id = 1;
 
 INSERT INTO orders (total_price, date, user_id, product_id, address_id)
 VALUES (1000, "2021-01-30", 1, 1, 1);
+
+INSERT INTO admins (email, password)
+VALUES ('admin1@admin.com', 'admin1')

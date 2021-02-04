@@ -7,7 +7,7 @@ class UserController {
   // always use async in front of fn name, & await before get post fetch etc stuff
 
   // render a view
-  async index({view}) {
+  async index({ view }) {
     // create variable that gets all the users
     const users = await User.all()
 
@@ -22,6 +22,7 @@ class UserController {
     })
 
   }
+
 }
 
 module.exports = UserController
