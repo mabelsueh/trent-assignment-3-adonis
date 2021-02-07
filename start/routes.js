@@ -24,7 +24,7 @@ Route.on('/').render('admin/login')
 Route.get('/admin/register', 'AdminController.register')
 Route.post('/admin/register', 'AdminController.processRegister')
 Route.get('/admin/login', 'AdminController.login');
-Route.post('/admin/login', 'AdminController.processLogin');
+Route.post('/admin/login', 'AdminController.processLogin')
 Route.get('/admin/show', 'AdminController.show')
 
 
@@ -34,17 +34,11 @@ Route.get('/admin/show', 'AdminController.show')
 
 // user routes
 // test controller
-// Route.get('/users', 'AdminController.index')
-// .middleware('auth:admin')
+Route.get('/users', 'UserController.index').as('users').middleware('auth:admin')
 
 
 // product routes
-// Route.get('products', 'ProductController.index')
-// .middleware('auth:admin')
-
-
-
-
+Route.get('products', 'ProductController.index').middleware('auth:admin')
 
 // render edge file on route
 // Route.on('/home').render('home')

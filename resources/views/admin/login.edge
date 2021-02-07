@@ -1,5 +1,5 @@
 @layout('base')
-{{ style('css.admin-style') }}
+{{--  {{ style('css.admin-style') }}  --}}
 
 @section('title')
 Admin Login
@@ -8,23 +8,27 @@ Admin Login
 @section('content')
 <div class="container">
   <h1 class="mb-7">Admin Login</h1>
-{{--  flash message for error  --}}
-  @if(flashMessage('warning'))
-      <div class="alert alert-danger">{{ flashMessage('warning') }}</div>
+  <form method="POST">
+  {{csrfField()}}
+  <div>
+    <label for="email" class="form-label">Email</label>
+  <input type="text" class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"/>
+    @if(hasErrorFor('email'))
+      <span class="text-danger">
+        {{ getErrorFor('email') }}
+      </span>
     @endif
-
-     <form method="POST">
-        {{--  action="/home"  --}}
-      {{csrfField()}}
-      <div class="form-group">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-      </div>
-      <div class="form-group">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    </div>
+  </div>
+  <div>
+    <label for="password" class="form-label mt-3">Password</label>
+    <input type="password" class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}"/>
+    @if(hasErrorFor('password'))
+      <span class="text-danger">
+        {{ getErrorFor('password') }}
+      </span>
+    @endif
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Login</button>
+</form>
 @endsection
+
