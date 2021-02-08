@@ -22,7 +22,7 @@ Route.on('/').render('admin/login')
 
 // group /admin routes
 Route.group( () => {
-  Route.get('/register', 'AdminController.register')
+  Route.get('/register', 'AdminController.register').as('registerpage')
   Route.post('/register', 'AdminController.processRegister').as('register')
   Route.get('/login', 'AdminController.login').as('loginpage')
   Route.post('/login', 'AdminController.processLogin').as('login')
