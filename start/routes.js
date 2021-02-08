@@ -15,30 +15,28 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-// should be can delete the line below
-// const User = use('App/Models/User')
 
 Route.on('/').render('admin/login')
 
-// paul routes
-Route.get('/admin/register', 'AdminController.register')
-Route.post('/admin/register', 'AdminController.processRegister')
-Route.get('/admin/login', 'AdminController.login');
-Route.post('/admin/login', 'AdminController.processLogin')
-Route.get('/admin/show', 'AdminController.show')
+// register and login admin
+
+// group /admin routes
+Route.group( () => {
+  Route.get('/register', 'AdminController.register')
+  Route.post('/register', 'AdminController.processRegister').as('register')
+  Route.get('/login', 'AdminController.login').as('loginpage')
+  Route.post('/login', 'AdminController.processLogin').as('login')
+  Route.get('/logout', 'AdminController.logout').as('logout')
+}).prefix('/admin')
 
 
-// login routes;
-// Route.post('/home', 'UserController.home')
-// .middleware('auth:admin')
-
-// user routes
-// test controller
+// on successful admin login
+// pls group with .middleware('auth:admin')
 Route.get('/users', 'UserController.index').as('users').middleware('auth:admin')
 
 
 // product routes
-Route.get('products', 'ProductController.index').middleware('auth:admin')
+Route.get('products', 'ProductController.index').as('productshome').middleware('auth:admin')
 
 // render edge file on route
 // Route.on('/home').render('home')
