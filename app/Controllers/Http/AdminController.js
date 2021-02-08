@@ -5,6 +5,10 @@ const Admin = use('App/Models/Admin')
 // bring in validator
 const { validateAll } = use('Validator')
 
+// use hash
+const Hash = use('Hash')
+
+
 class AdminController {
   register({ view }) {
     return view.render('admin/register')
@@ -39,8 +43,7 @@ class AdminController {
     admin.email = formData.email
     admin.password = formData.password
     await admin.save()
-    // add flash message here before redirect to login page
-    // session.flash({ notification: 'Account Created!' })
+    session.flash({ notification: `Account for ${admin.email} has been created!` })
     // setTimeout(function(){ session.flash({ notification: 'Account Created!' }); }, 3000);
     return response.redirect('login')
 
@@ -52,14 +55,29 @@ class AdminController {
     let formData = request.post()
     // auth.authenticator('user').attempt
     // need to do the check with database thingy to authenticate user, not the current one as it does not use db
-
-    // Login
-    await auth.authenticator('admin').attempt(formData.email, formData.password);
-    return response.redirect('/users')
+    // need hash pasword thingy also
+    let adminInput = await Admin.findBy('email', formData.email)
+    // const isSame = await Hash.verify(formData.password, 'password')
+    if (!adminInput) {
+      session.withErrors({ email: 'Email does not match records' }).flashAll()
+      return response.redirect('back')
+    }
+    else {
+      let adminInputPassword = adminInput.toJSON()
+      const isSame = await Hash.verify(formData.password, adminInputPassword.password)
+      if (!isSame) {
+      session.withErrors({ password: 'Password does not match records' }).flashAll()
+      return response.redirect('back')
+      }
+      else {
+      await auth.authenticator('admin').attempt(formData.email, formData.password);
+      return response.route('users')
+      }
+    }
   }
-  async show({ auth, response }) {
-    let admin = await admin.find(auth.admin.id)
-    return response.json(admin)
+  async logout({auth, response}){
+    await auth.logout()
+    response.route('loginpage')
   }
 
 }

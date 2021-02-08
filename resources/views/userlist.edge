@@ -4,8 +4,12 @@
 User List
 @endsection
 
-@section('content')
+@section('nav')
 @include('navbar')
+@endsection
+
+@section('content')
+
   <table class="table">
     <thead>
       <tr>
@@ -15,7 +19,6 @@ User List
         <th scope="col">Email</th>
         <th scope="col">Contact</th>
         <th scope="col">Password</th>
-        <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
       </thead>
@@ -28,7 +31,6 @@ User List
         <td class="align-middle">{{user.email}}</td>
         <td class="align-middle">{{user.contact}}</td>
         <td class="align-middle">{{user.password}}</td>
-        <td><button class="btn btn-warning btn-block">Edit</button></td>
         <td><button class="btn btn-danger btn-block">Del</button></td>
       </tr>
     @endeach

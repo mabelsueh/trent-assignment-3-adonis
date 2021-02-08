@@ -17,6 +17,8 @@
     @if(flashMessage('notification'))
       <div class="alert alert-success">{{ flashMessage('notification') }}</div>
     @endif
+    @section('nav')
+    @endsection
     <div class="container">
         @section('content')
         @endsection
