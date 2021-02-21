@@ -44,8 +44,7 @@ class AdminController {
     admin.password = formData.password
     await admin.save()
     session.flash({ notification: `Account for ${admin.email} has been created!` })
-    // setTimeout(function(){ session.flash({ notification: 'Account Created!' }); }, 3000);
-    return response.redirect('login')
+    return response.route('loginpage')
 
   }
   login({ view, session }) {
@@ -54,7 +53,8 @@ class AdminController {
   async processLogin({ request, auth, response, session }) {
     let formData = request.post()
     // auth.authenticator('user').attempt
-    // need to do the check with database thingy to authenticate user, not the current one as it does not use db
+    // need to do the check with database thingy to authenticate user,
+    // not the current one as it does not use db
     // need hash pasword thingy also
     let adminInput = await Admin.findBy('email', formData.email)
     // const isSame = await Hash.verify(formData.password, 'password')
@@ -74,6 +74,9 @@ class AdminController {
       return response.route('users')
       }
     }
+  }
+  route({ response }) {
+    return response.route('loginpage')
   }
   async logout({auth, response}){
     await auth.logout()
