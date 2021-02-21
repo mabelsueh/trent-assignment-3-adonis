@@ -16,7 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('admin/login')
+Route.get('/', 'AdminController.route')
 
 // register and login admin
 
@@ -34,6 +34,9 @@ Route.group( () => {
 // pls group with .middleware('auth:admin')
 Route.get('/users', 'UserController.index').as('users').middleware('auth:admin')
 
+//create user
+Route.get('/users/create', 'UserController.createUser').as('userscreateview').middleware('auth:admin')
+Route.post('/users/create', 'UserController.processCreate').as('processCreate').middleware('auth:admin')
 
 // product routes
 Route.get('products', 'ProductController.index').as('productshome').middleware('auth:admin')

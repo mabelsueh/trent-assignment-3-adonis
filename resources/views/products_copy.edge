@@ -1,0 +1,54 @@
+@layout('base')
+@section('title')
+Products List
+@endsection
+
+@section('nav')
+@include('navbar')
+@endsection
+
+@section('content')
+<h1 style="text-align: center">Products</h1>
+<button type="button" class="btn btn-success btn-lg btn-block my-4">Add New Product</button>
+{{--  try grid  --}}
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card my-3">
+      <div class="card-body">
+        <h2 class="card-title">Tools</h2>
+        <p class="card-text">SKU: Tools T-xx-xxx</p>
+        <a href="#" class="btn btn-primary">View</a>
+      </div>
+    </div>
+    <div class="card my-3">
+      <div class="card-body">
+        <h2 class="card-title">Supplies</h2>
+        <p class="card-text">SKU: Edge Paint EP-xx-xxx | Finishing: FIN-xx-xxx</p>
+        <a href="#" class="btn btn-primary">View</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card my-3">
+      <div class="card-body">
+        <h2 class="card-title">Stitching</h2>
+        <p class="card-text">SKU: Threads THR-xx-xxx |  Sewing Tools SWT-xx-xxx | </p>
+        <a href="#" class="btn btn-primary">View</a>
+      </div>
+    </div>
+    <div class="card my-3">
+      <div class="card-body">
+        <h2 class="card-title">Accessories</h2>
+        <p class="card-text">SKU: ACC-xx-xxx </p>
+        <a href="#" class="btn btn-primary">View</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{--  end try grid  --}}
+
+
+
+
+
+@endsection
