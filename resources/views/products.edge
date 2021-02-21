@@ -1,4 +1,5 @@
 @layout('base')
+
 @section('title')
 Products List
 @endsection
@@ -8,47 +9,36 @@ Products List
 @endsection
 
 @section('content')
-<h1 style="text-align: center">Products</h1>
-<button type="button" class="btn btn-success btn-lg btn-block my-4">Add New Product</button>
-{{--  try grid  --}}
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card my-3">
-      <div class="card-body">
-        <h2 class="card-title">Tools</h2>
-        <p class="card-text">SKU: Tools T-xx-xxx</p>
-        <a href="#" class="btn btn-primary">View</a>
-      </div>
-    </div>
-    <div class="card my-3">
-      <div class="card-body">
-        <h2 class="card-title">Supplies</h2>
-        <p class="card-text">SKU: Edge Paint EP-xx-xxx | Finishing: FIN-xx-xxx</p>
-        <a href="#" class="btn btn-primary">View</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card my-3">
-      <div class="card-body">
-        <h2 class="card-title">Stitching</h2>
-        <p class="card-text">SKU: Threads THR-xx-xxx |  Sewing Tools SWT-xx-xxx | </p>
-        <a href="#" class="btn btn-primary">View</a>
-      </div>
-    </div>
-    <div class="card my-3">
-      <div class="card-body">
-        <h2 class="card-title">Accessories</h2>
-        <p class="card-text">SKU: ACC-xx-xxx </p>
-        <a href="#" class="btn btn-primary">View</a>
-      </div>
-    </div>
-  </div>
-</div>
-{{--  end try grid  --}}
+  <a class="btn btn-success mt-3 mb-3" href="{{ route('productscreateview')}}" role="button">Add Product</a>
 
-
-
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">SKU</th>
+        <th scope="col">Category</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+        <th scope="col">Edit/Del</th>
+      </tr>
+      </thead>
+    <tbody>
+      <tr>
+        @each(product in products)
+        <th scope="row" class="align-middle">{{product.id}}</th>
+        <td class="align-middle">{{product.product_name}}</td>
+        <td class="align-middle">{{product.sku}}</td>
+        <td class="align-middle">{{product.category}}</td>
+        <td class="align-middle">{{product.description}}</td>
+        <td class="align-middle">{{product.price/100}}</td>
+        <td class="align-middle">{{product.imgurl}}</td>
+        <td><button class="btn btn-warning btn-block mr-3">Edit</button><button class="btn btn-danger btn-block">Del</button></td>
+      </tr>
+    @endeach
+    </tbody>
+  </table>
 
 
 @endsection
