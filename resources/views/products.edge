@@ -10,7 +10,7 @@ Products List
 
 @section('content')
   <a class="btn btn-success mt-3 mb-3" href="{{ route('productscreateview')}}" role="button">Add Product</a>
-
+  <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -35,7 +35,7 @@ Products List
         <td class="align-middle">{{product.description}}</td>
         <td class="align-middle">{{product.price/100}}</td>
         <td>
-          <img src='{{product.imgurl}}'alt="imgurl" height="150px"/>
+          <img src='{{product.imgurl}}'alt="imgurl" height="100px"/>
         </td>
         <td class="align-middle">{{product.updated_at}}</td>
         <td><button class="btn btn-warning btn-block mr-3">Edit</button><button class="btn btn-danger btn-block">Del</button></td>
@@ -43,6 +43,7 @@ Products List
     @endeach
     </tbody>
   </table>
+  </div>
 
 
 @endsection

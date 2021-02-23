@@ -50,3 +50,5 @@ Route.post('/products/create', 'ProductController.processCreateProduct').as('pro
 // Route.get('/user/:id', ({params}) => {
 //   return `The ID number is: ${params.id}`
 // })
+
+Route.get('cloudinary/sign', 'CloudinaryController.sign').as('cloudinary_sign')

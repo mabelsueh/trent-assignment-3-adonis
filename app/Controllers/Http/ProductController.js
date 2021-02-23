@@ -3,7 +3,6 @@
 const { validateAll } = use('Validator')
 const Product = use('App/Models/Product')
 const Config = use('Config')
-const Cloudinary = use('Cloudinary')
 
 class ProductController {
   async index({ view }) {
@@ -15,10 +14,10 @@ class ProductController {
   }
   createProduct({ view }) {
     return view.render('createproduct', {
-      'cloudinaryName':Config.get('cloudinary.name'),
-      'cloudinaryApiKey':Config.get('cloudinary.api_key'),
-      'cloudinaryPreset':Config.get('cloudinary.preset'),
-      'sign_url':'/cloudinary/sign',
+      cloudinaryName:Config.get('cloudinary.name'),
+      cloudinaryApiKey:Config.get('cloudinary.api_key'),
+      cloudinaryPreset:Config.get('cloudinary.preset'),
+      signUrl:'/cloudinary/sign',
     })
   }
 
@@ -28,6 +27,7 @@ class ProductController {
       sku:'required',
       description:'required',
       price:'required',
+      imgurl:'required'
     }
 
     const messages = {
@@ -35,9 +35,10 @@ class ProductController {
      'sku.required':'Please enter SKU',
      'description.required':'Description cannot be empty',
      'price.required':'Please enter a price',
+     'imgurl.required':'Please provide image'
     }
     let formData = request.post()
-    const validation = await validateAll(body, rules, messages)
+    const validation = await validateAll(formData, rules, messages)
     if (validation.fails()) {
       session
         .withErrors(validation.messages())
@@ -55,8 +56,7 @@ class ProductController {
 
     session.flash({ notification: `${newProduct.product_name} has been created!` })
     await newProduct.save()
-    // need to add address part
-    response.route('products')
+    response.route('productshome')
   }
 }
 

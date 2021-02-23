@@ -47,7 +47,7 @@ Create Product
     @if(hasErrorFor('description'))
     <div class="invalid-feedback">{{ getErrorFor('description') }}</div>
     @endif
-  </div>
+</div>
 
   <div>
     <label class="form-label mt-3">Price</label>
@@ -55,12 +55,18 @@ Create Product
     @if(hasErrorFor('price'))
     <div class="invalid-feedback">{{ getErrorFor('price') }}</div>
     @endif
-    <small id="priceHelp" class="form-text text-muted">Price should be indicated in cents e.g. $10.10 = 1010</small>
+    <small id="priceHelp" class="form-text text-muted mb-5">Price should be indicated in cents e.g. $10.10 = 1010</small>
   </div>
-  <div>
+  <div class="
+      @if(hasErrorFor('imgurl'))
+           is-invalid
+        @endif
+      "
+      >
       <a href='#' class="btn btn-info mt-3" id="upload_widget">Upload Image</a>
-      <input type="hidden" name="image_url" id="image_url"/>
-      <img src="" id="uploaded_image" style="display:none"/>
+      <input type="hidden" name="imgurl" id="imgurl" value="{{old('imgurl')}}"/>
+      <img src="" id="uploaded_image" style="display:none" value="{{old('imgurl')}}"/>
+      {{ elIf('<div class="invalid-feedback" style="display:block">$self</div>', getErrorFor('imgurl'), hasErrorFor('imgurl')) }}
     </div>
   <button type="submit" class="btn btn-primary mt-5">Submit</button>
 </form>
@@ -88,12 +94,12 @@ Create Product
     uploadSignature:generateSignature
   }, (error,result)=>{
     if (!error && result && result.event === 'success') {
-      console.log("Upload success!")
-      console.log(result.info);
-      document.querySelector('#image_url').value = result.info.url;
-      document.querySelector('#upload_widget').style.display='none';
-      document.querySelector('#uploaded_image').src=result.info.url;
-      document.querySelector('#uploaded_image').style.display="block"
+      console.log('Done! Here is the image info: ', result.info)
+
+      document.querySelector('#upload_widget').style.display='none'
+      document.querySelector('#imgurl').value = result.info.url
+      document.querySelector('#uploaded_image').src=result.info.url
+      document.querySelector('#uploaded_image').style.display="inline"
     }
   })
 
