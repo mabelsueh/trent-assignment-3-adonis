@@ -16,37 +16,91 @@ Create Product
 @endif
 <form method="POST">
   {{csrfField()}}
-  {{--  u need: image edit/del  --}}
   <div>
-    <label class="form-label mt-3">Name</label>
-    <input type="text" name="product_name" class="form-control"/>
+    <label class="form-label">Name</label>
+    <input type="text" name="product_name" value="{{ old('product_name', '') }}" class="form-control {{ hasErrorFor('product_name') ? 'is-invalid' : '' }}"/>
+    @if(hasErrorFor('product_name'))
+    <div class="invalid-feedback">{{ getErrorFor('product_name') }}</div>
+    @endif
   </div>
   <div>
     <label class="form-label mt-3">SKU</label>
-    <input type="text" name="sku" class="form-control"/>
+    <input type="text" name="sku" value="{{ old('sku', '') }}" class="form-control {{ hasErrorFor('sku') ? 'is-invalid' : '' }}"/>
+    @if(hasErrorFor('sku'))
+    <div class="invalid-feedback">{{ getErrorFor('sku') }}</div>
+    @endif
   </div>
-  <div>
-    {{--  in options please  --}}
+
   <div>
     <label class="form-label mt-3">Category</label>
     <select name="category" class="form-control">
-      <option>Tools</option>
-      <option>Supplies</option>
-      <option>Stitching</option>
-      <option>Accessories</option>
+      <option value="tools">Tools</option>
+      <option value="supplies">Supplies</option>
+      <option value="stitching">Stitching</option>
+      <option value="accessories">Accessories</option>
     </select>
   </div>
-  <div>
-    <label class="form-label mt-3">Description</label>
-    <textarea rows="5" name="description" class="form-control"></textarea>
-  </div>
-  <div>
-    <label class="form-label mt-3">Price in cents</label>
-    <input type="text" name="price" class="form-control"/>
+
+  <div class="form-group">
+    <label class="form-label">Description</label>
+    <textarea name="description" rows="5" value="{{ old('description', '') }}" class="form-control {{ hasErrorFor('description') ? 'is-invalid' : '' }}"></textarea>
+    @if(hasErrorFor('description'))
+    <div class="invalid-feedback">{{ getErrorFor('description') }}</div>
+    @endif
   </div>
 
-  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  <div>
+    <label class="form-label mt-3">Price</label>
+    <input type="text" name="price" class="form-control"  aria-describedby="priceHelp" value="{{ old('price', '') }}" class="form-control {{ hasErrorFor('price') ? 'is-invalid' : '' }}"/>
+    @if(hasErrorFor('price'))
+    <div class="invalid-feedback">{{ getErrorFor('price') }}</div>
+    @endif
+    <small id="priceHelp" class="form-text text-muted">Price should be indicated in cents e.g. $10.10 = 1010</small>
+  </div>
+  <div>
+      <a href='#' class="btn btn-info mt-3" id="upload_widget">Upload Image</a>
+      <input type="hidden" name="image_url" id="image_url"/>
+      <img src="" id="uploaded_image" style="display:none"/>
+    </div>
+  <button type="submit" class="btn btn-primary mt-5">Submit</button>
 </form>
 @endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+
+<script>
+  function generateSignature(callback, params_to_sign) {
+    axios.get('{{signUrl}}', {
+      params: {
+        params_to_sign
+      }
+    }).then(function(response){
+      callback(response.data)
+    })
+  }
+
+  let myWidget = cloudinary.createUploadWidget({
+    cloudName: '{{cloudinaryName}}',
+    apiKey:'{{cloudinaryApiKey}}',
+    uploadPreset:'{{cloudinaryPreset}}',
+    uploadSignature:generateSignature
+  }, (error,result)=>{
+    if (!error && result && result.event === 'success') {
+      console.log("Upload success!")
+      console.log(result.info);
+      document.querySelector('#image_url').value = result.info.url;
+      document.querySelector('#upload_widget').style.display='none';
+      document.querySelector('#uploaded_image').src=result.info.url;
+      document.querySelector('#uploaded_image').style.display="block"
+    }
+  })
+
+  document.querySelector('#upload_widget').addEventListener('click', function(){
+    myWidget.open()
+  }, false)
+
+</script>
 
 @endsection
