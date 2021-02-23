@@ -1,0 +1,52 @@
+@layout('base')
+
+@section('title')
+Create Product
+@endsection
+
+@section('nav')
+@include('navbar')
+@endsection
+
+@section('content')
+<h1>Add Product</h1>
+
+@if(old('notification'))
+  <div class="alert alert-success">{{ old('notification') }}</div>
+@endif
+<form method="POST">
+  {{csrfField()}}
+  {{--  u need: image edit/del  --}}
+  <div>
+    <label class="form-label mt-3">Name</label>
+    <input type="text" name="product_name" class="form-control"/>
+  </div>
+  <div>
+    <label class="form-label mt-3">SKU</label>
+    <input type="text" name="sku" class="form-control"/>
+  </div>
+  <div>
+    {{--  in options please  --}}
+  <div>
+    <label class="form-label mt-3">Category</label>
+    <select name="category" class="form-control">
+      <option>Tools</option>
+      <option>Supplies</option>
+      <option>Stitching</option>
+      <option>Accessories</option>
+    </select>
+  </div>
+  <div>
+    <label class="form-label mt-3">Description</label>
+    <textarea rows="5" name="description" class="form-control"></textarea>
+  </div>
+  <div>
+    <label class="form-label mt-3">Price in cents</label>
+    <input type="text" name="price" class="form-control"/>
+  </div>
+
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+@endsection
+
+@endsection

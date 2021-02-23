@@ -40,6 +40,8 @@ Route.post('/users/create', 'UserController.processCreate').as('processCreate').
 
 // product routes
 Route.get('products', 'ProductController.index').as('productshome').middleware('auth:admin')
+Route.get('/products/create', 'ProductController.createProduct').as('productscreateview').middleware('auth:admin')
+Route.post('/products/create', 'ProductController.processCreateProduct').as('processCreateProduct').middleware('auth:admin')
 
 // render edge file on route
 // Route.on('/home').render('home')
