@@ -85,7 +85,12 @@ class ProductController {
     response.route('productshome')
   }
 
-
+  async deleteProduct({params, response, session}){
+    let product = await Product.find(params.id)
+    session.flash({ warning: `${product.product_name} has been deleted!` });
+    await product.delete()
+    response.route('productshome')
+  }
 }
 
 module.exports = ProductController
