@@ -8,12 +8,12 @@ class ProductController {
   async index({ view }) {
     const products = await Product.all()
 
-    return view.render('products', {
+    return view.render('product/products', {
       products: products.toJSON()
     })
   }
   createProduct({ view }) {
-    return view.render('createproduct', {
+    return view.render('product/createproduct', {
       cloudinaryName:Config.get('cloudinary.name'),
       cloudinaryApiKey:Config.get('cloudinary.api_key'),
       cloudinaryPreset:Config.get('cloudinary.preset'),

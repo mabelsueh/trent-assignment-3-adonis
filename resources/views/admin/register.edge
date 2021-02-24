@@ -1,36 +1,48 @@
 @layout('base')
 
+@section('css')
+  .container{
+    height:90vh !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+@endsection
+
 @section('title')
-Register Admin
+Register Admin Account
 @endsection
 
 @section('content')
-<h1>Register Admin Account</h1>
+<div class="container">
+
 @if(old('notification'))
   <div class="alert alert-success">{{ old('notification') }}</div>
 @endif
-<form method="POST">
-  {{csrfField()}}
-  <div>
-    <label for="email" class="form-label">Email</label>
-  <input type="text" class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"/>
-    @if(hasErrorFor('email'))
-      <span class="text-danger">
-        {{ getErrorFor('email') }}
-      </span>
-    @endif
-  </div>
-  <div>
-    <label for="password" class="form-label mt-3">Password</label>
-    <input type="password" class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}"/>
-    @if(hasErrorFor('password'))
-      <span class="text-danger">
-        {{ getErrorFor('password') }}
-      </span>
-    @endif
-  </div>
-  <button type="submit" class="btn btn-primary mt-3">Submit</button>
-  <a class="btn btn-info mt-3 float-right" href="{{ route('loginpage')}}" role="button">Login</a>
+  <form method="POST">
+    {{csrfField()}}
+    <h1>Register Admin Account</h1>
+    <div>
+      <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"/>
+      @if(hasErrorFor('email'))
+        <span class="text-danger">
+          {{ getErrorFor('email') }}
+        </span>
+      @endif
+    </div>
+    <div>
+      <label for="password" class="form-label mt-3">Password</label>
+      <input type="password" class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}"/>
+      @if(hasErrorFor('password'))
+        <span class="text-danger">
+          {{ getErrorFor('password') }}
+        </span>
+      @endif
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    <a class="btn btn-info mt-3 float-right" href="{{ route('loginpage')}}" role="button">Login</a>
 
-</form>
+  </form>
+</div>
 @endsection

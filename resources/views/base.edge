@@ -8,6 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <style>
+    @section('css')
+    @endsection
+    </style>
+
     <title>
      @section('title')
      @endsection
@@ -35,10 +40,9 @@
     @section('nav')
     @endsection
 
-    <div class="container">
-        @section('content')
-        @endsection
-    </div>
+    @section('content')
+    @endsection
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -14,7 +14,7 @@ class UserController {
     const users = await User.all()
 
     // use foldername.filename if edge file is in subfolder
-    return view.render('userlist', {
+    return view.render('user/userlist', {
       // title is data to be passed into view
       // use {}(parameter which is an object) to represent data in controller
       // & {{}} in edge file
@@ -26,7 +26,7 @@ class UserController {
   }
 
   createUser({ view }) {
-    return view.render('createuser')
+    return view.render('user/createuser')
   }
 
   async processCreate({response, request}){

@@ -1,14 +1,24 @@
 @layout('base')
-{{--  {{ style('css.admin-style') }}  --}}
+
+@section('css')
+  .container{
+    height:90vh !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+@endsection
 
 @section('title')
 Admin Login
 @endsection
 
 @section('content')
-  <h1 class="mt-7">Admin Login</h1>
+<div class="container">
+
   <form method="POST">
   {{csrfField()}}
+    <h1>Leather Tool Shop Admin Login</h1>
   <div>
     <label for="email" class="form-label">Email</label>
   <input type="text" class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"/>
@@ -30,6 +40,7 @@ Admin Login
   <button type="submit" class="btn btn-primary mt-3">Login</button>
   <a class="btn btn-info mt-3 float-right" href="{{ route('registerpage')}}" role="button">Register</a>
 </form>
+</div>
 
 @endsection
 
