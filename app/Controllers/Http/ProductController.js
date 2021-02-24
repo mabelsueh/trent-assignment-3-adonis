@@ -58,6 +58,34 @@ class ProductController {
     await newProduct.save()
     response.route('productshome')
   }
+
+  async update({params, view}){
+    let product = await Product.find(params.id)
+    return view.render('product/updateproduct', {
+      'product':product.toJSON(),
+      'cloudinaryName':Config.get('cloudinary.name'),
+      'cloudinaryApiKey':Config.get('cloudinary.api_key'),
+      'cloudinaryPreset':Config.get('cloudinary.preset'),
+      'sign_url':'/cloudinary/sign',
+    })
+  }
+
+  async processUpdate({params, request, response, session}){
+    let product = await Product.find(params.id)
+    let formData = request.post()
+    product.product_name = formData.product_name
+    product.sku = formData.sku
+    product.category = formData.category
+    product.description = formData.description
+    product.price = formData.price
+    product.imgurl = formData.imgurl
+    await product.save()
+    session.flash({ notification: `${product.product_name} has been updated!` })
+    await product.save()
+    response.route('productshome')
+  }
+
+
 }
 
 module.exports = ProductController

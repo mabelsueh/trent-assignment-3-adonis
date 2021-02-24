@@ -10,7 +10,7 @@ Products List
 
 @section('content')
   <a class="btn btn-success mt-3 mb-3" href="{{ route('productscreateview')}}" role="button">Add Product</a>
-  <div class="table-responsive">
+  <div class="table-responsive mx-0">
   <table class="table">
     <thead>
       <tr>
@@ -21,8 +21,9 @@ Products List
         <th scope="col">Description</th>
         <th scope="col">Price</th>
         <th scope="col">Image</th>
+        <th scope="col">Edit</th>
         <th scope="col">Last Updated</th>
-        <th scope="col">Edit/Del</th>
+        <th scope="col">Delete</th>
       </tr>
       </thead>
     <tbody>
@@ -37,8 +38,17 @@ Products List
         <td>
           <img src='{{product.imgurl}}'alt="imgurl" height="100px"/>
         </td>
+        <td class="align-middle">
+          <a href="{{ route('updateProduct', {id:product.id}) }}">
+            <button class="btn btn-warning btn-block mb-3">Edit</button>
+          </a>
+        </td>
         <td class="align-middle">{{product.updated_at}}</td>
-        <td><button class="btn btn-warning btn-block mr-3">Edit</button><button class="btn btn-danger btn-block">Del</button></td>
+        <td class="align-middle">
+          <a href="{{ route('deleteProduct', {id:product.id}) }}">
+            <button class="btn btn-danger btn-block">Del</button>
+          </a>
+        </td>
       </tr>
     @endeach
     </tbody>

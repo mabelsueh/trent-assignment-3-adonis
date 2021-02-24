@@ -42,7 +42,8 @@ Route.post('/users/create', 'UserController.processCreate').as('processCreate').
 Route.get('products', 'ProductController.index').as('productshome').middleware('auth:admin')
 Route.get('/products/create', 'ProductController.createProduct').as('productscreateview').middleware('auth:admin')
 Route.post('/products/create', 'ProductController.processCreateProduct').as('processCreateProduct').middleware('auth:admin')
-
+Route.get('/products/update/:id', 'ProductController.update').as('updateProduct').middleware('auth:admin')
+Route.post('/products/update/:id', 'ProductController.processUpdate').as('processUpdateProduct').middleware('auth:admin')
 // render edge file on route
 // Route.on('/home').render('home')
 
