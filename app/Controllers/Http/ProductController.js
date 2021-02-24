@@ -71,8 +71,10 @@ class ProductController {
   }
 
   async processUpdate({params, request, response, session}){
+
     let product = await Product.find(params.id)
     let formData = request.post()
+
     product.product_name = formData.product_name
     product.sku = formData.sku
     product.category = formData.category

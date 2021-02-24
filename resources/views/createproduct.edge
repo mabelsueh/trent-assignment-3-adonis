@@ -11,9 +11,6 @@ Create Product
 @section('content')
 <h1>Add Product</h1>
 
-@if(old('notification'))
-  <div class="alert alert-success">{{ old('notification') }}</div>
-@endif
 <form method="POST">
   {{csrfField()}}
   <div>
@@ -32,7 +29,6 @@ Create Product
   </div>
 
   <div>
-
     <label class="form-label mt-3">Category</label>
     <select name="category" class="form-control">
       <option value="tools">Tools</option>

@@ -23,12 +23,13 @@ Create Product
   <div>
     {{--  option keeps changing to tools  --}}
    <label class="form-label mt-3">Category</label>
-   <select name="category" class="form-control" value="{{product.category}}">
-      <option value="tools">Tools</option>
-      <option value="supplies">Supplies</option>
-      <option value="stitching">Stitching</option>
-      <option value="accessories">Accessories</option>
+   <select name="category" class="form-control">
+      <option value="tools" {{product.category == "tools" ? 'selected' : ''}}>Tools</option>
+      <option value="supplies" {{product.category == "supplies" ? 'selected' : ''}}>Supplies</option>
+      <option value="stitching" {{product.category == "stitching" ? 'selected' : ''}}>Stitching</option>
+      <option value="accessories" {{product.category == "accessories" ? 'selected' : ''}}>Accessories</option>
    </select>
+
   </div>
   <div class="form-group">
     <label class="form-label mt-3">Description</label>
