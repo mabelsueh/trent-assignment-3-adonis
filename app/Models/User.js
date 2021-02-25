@@ -7,6 +7,12 @@ const Hash = use('Hash')
 const Model = use('Model')
 
 class User extends Model {
+  addresses(){
+    return this.belongsToMany('App/Models/Address').pivotTable('user_addresses')
+  }
+  orders(){
+    return this.hasMany('App/Models/Order')
+  }
   static boot () {
     super.boot()
 

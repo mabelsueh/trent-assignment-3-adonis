@@ -35,6 +35,8 @@ Route.group( () => {
 Route.get('/users', 'UserController.index').as('users').middleware('auth:admin')
 
 //create user
+Route.get('/users-api', 'UserController.index')
+Route.get('/users', 'UserController.adminIndex').as('UsersList').middleware('auth:admin')
 Route.get('/users/create', 'UserController.createUser').as('userscreateview').middleware('auth:admin')
 Route.post('/users/create', 'UserController.processCreate').as('processCreate').middleware('auth:admin')
 

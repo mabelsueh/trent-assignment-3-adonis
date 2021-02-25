@@ -19,7 +19,7 @@ User List
           <th scope="col">Last Name</th>
           <th scope="col">Email</th>
           <th scope="col">Contact</th>
-          <th scope="col">Password</th>
+          <th scope="col">Address</th>
           <th scope="col">Delete</th>
         </tr>
         </thead>
@@ -31,9 +31,22 @@ User List
           <td class="align-middle">{{user.last_name}}</td>
           <td class="align-middle">{{user.email}}</td>
           <td class="align-middle">{{user.contact}}</td>
-          <td class="align-middle">{{user.password}}</td>
-          <td><button class="btn btn-danger btn-block">Del</button></td>
+          @each(a in user.addresses)
+          <td>
+            <table class="table">
+              <tr>{{a.block}} {{a.street}}
+                <br><br>
+                {{a.floor}} - {{a.unit}}
+                <br><br>
+                {{a.building}}
+                <br><br>
+                {{a.postal_code}}
+              </tr>
         </tr>
+      </table>
+    </td>
+    @endeach
+
       @endeach
       </tbody>
     </table>
