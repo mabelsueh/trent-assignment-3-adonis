@@ -122,7 +122,7 @@ class UserController {
     session.flash({ notification: `Account for ${newUser.email} has been created!` })
     await newAddress.save()
     await newUser.addresses().attach(newAddress.id)
-    return response.route('UsersList')
+    return response.route('newuserlist')
   }
 }
 
