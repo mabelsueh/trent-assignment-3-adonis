@@ -53,18 +53,19 @@ class UserController {
       last_name:'required',
       email:'required|unique:users',
       contact:'required',
-      password:'required|min:5',
+      password:'required|confirmed|min:5',
       street:'required',
       postal_code:'required'
     }
     const messages = {
-      'first_name.required':'Please provide your first name',
-     'last_name.required':'Please provide your last name',
-     'email.required':'Please provide your valid email',
+      'first_name.required':'Please enter first name',
+     'last_name.required':'Please enter last name',
+     'email.required':'Please enter email',
      'email.unique':'Email has been registered before',
-     'contact.required':'Please provide your contact',
-     'password.required':'Please enter your password',
+     'contact.required':'Please enter contact',
+     'password.required':'Please enter password',
      'password.min':'Password should contain at least 5 characters',
+     'password.confirmed':'Passwords do not match',
      'street.required':'Please enter a street name',
      'postal_code.required':'Please enter a postal code'
     }
@@ -76,7 +77,7 @@ class UserController {
         .flashAll()
       return response.redirect('back')
     }
-    let newUser = new Users()
+    let newUser = new User()
     newUser.first_name = formData.first_name
     newUser.last_name = formData.last_name
     newUser.email = formData.email
@@ -85,7 +86,7 @@ class UserController {
 
     await newUser.save()
 
-    let newAddress = new Addresses()
+    let newAddress = new Address()
     if(formData.block === null){
       newAddress.block = ""
     }
