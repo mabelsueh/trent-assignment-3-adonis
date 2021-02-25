@@ -7,6 +7,11 @@
     justify-content:center !important;
     align-items:center !important;
   }
+  .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 @endsection
 
 @section('title')
@@ -18,7 +23,8 @@ Admin Login
 
   <form method="POST">
   {{csrfField()}}
-    <h1>Leather Tool Shop Admin Login</h1>
+    <img src="images/logo.png" alt="logo image" height="130px" class="center"/>
+    <h1 class="text-center mt-3">Admin Login</h1>
   <div>
     <label for="email" class="form-label">Email</label>
   <input type="text" class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"/>
@@ -37,8 +43,12 @@ Admin Login
       </span>
     @endif
   </div>
-  <button type="submit" class="btn btn-primary mt-3">Login</button>
-  <a class="btn btn-info mt-3 float-right" href="{{ route('registerpage')}}" role="button">Register</a>
+  <div class="my-2 text-center">
+    <button type="submit" class="btn btn-primary mt-3">Login</button>
+  </div>
+  <div class="mt-5 text-center">
+    <a href="{{ route('registerpage')}}">Don't have an account? Click here to register</a>
+  </div>
 </form>
 </div>
 

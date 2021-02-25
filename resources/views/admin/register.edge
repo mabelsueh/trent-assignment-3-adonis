@@ -2,15 +2,20 @@
 
 @section('css')
   .container{
-    height:90vh !important;
-    display:flex !important;
-    justify-content:center !important;
-    align-items:center !important;
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
   }
+  .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 @endsection
 
 @section('title')
-Register Admin Account
+Register Admin
 @endsection
 
 @section('content')
@@ -21,9 +26,10 @@ Register Admin Account
 @endif
   <form method="POST">
     {{csrfField()}}
-    <h1>Register Admin Account</h1>
+    <img src="images/logo.png" alt="logo image" height="130px" class="center"/>
+    <h1 class="text-center mt-3">Register Admin</h1>
     <div>
-      <label for="email" class="form-label">Email</label>
+      <label class="form-label">Email</label>
     <input type="text" class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"/>
       @if(hasErrorFor('email'))
         <span class="text-danger">
@@ -32,7 +38,7 @@ Register Admin Account
       @endif
     </div>
     <div>
-      <label for="password" class="form-label mt-3">Password</label>
+      <label class="form-label mt-3">Password</label>
       <input type="password" class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}"/>
       @if(hasErrorFor('password'))
         <span class="text-danger">
@@ -40,9 +46,15 @@ Register Admin Account
         </span>
       @endif
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    <a class="btn btn-info mt-3 float-right" href="{{ route('loginpage')}}" role="button">Login</a>
-
+    <div>
+      <label class="form-label mt-3">Confirm Password</label>
+      <input type="password" class="form-control" name="password_confirmation"/>
+    <div class="my-2 text-center">
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </div>
+    <div class="mt-5 text-center">
+      <a href="{{ route('loginpage')}}" role="button">Already have an account? Click here to login</a>
+    </div>
   </form>
 </div>
 @endsection

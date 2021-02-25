@@ -17,7 +17,7 @@ class AdminController {
 
     const rules = {
       email: 'required|email|unique:admins,email',
-      password: 'required|min:6'
+      password: 'required|confirmed|min:6'
     }
 
     const messages = {
@@ -25,6 +25,7 @@ class AdminController {
       'email.email': 'Check email format',
       'email.unique': 'Email has been registered',
       'password.required': 'Password cannot be empty',
+      'password.confirmed': 'Passwords do not match',
       'password.min': 'Password must be 6 or more characters'
     }
 
@@ -33,7 +34,8 @@ class AdminController {
     if (validation.fails()) {
       session
         .withErrors(validation.messages())
-        .flashExcept([''])
+        // .flashExcept([''])
+        .flashAll()
 
       return response.redirect('back')
     }
