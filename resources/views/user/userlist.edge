@@ -23,32 +23,37 @@ User List
           <th scope="col">Delete</th>
         </tr>
         </thead>
+        @each(u in user)
       <tbody>
+
         <tr>
-          @each(user in users)
-          <th scope="row" class="align-middle">{{user.id}}</th>
-          <td class="align-middle">{{user.first_name}}</td>
-          <td class="align-middle">{{user.last_name}}</td>
-          <td class="align-middle">{{user.email}}</td>
-          <td class="align-middle">{{user.contact}}</td>
-          @each(a in user.addresses)
-          <td>
+          <td scope="row" class="align-middle">{{u.id}}</th>
+          <td scope="row" class="align-middle">{{u.first_name}}</td>
+          <td scope="row" class="align-middle">{{u.last_name}}</td>
+          <td scope="row" class="align-middle">{{u.email}}</td>
+          <td scope="row" class="align-middle">{{u.contact}}</td>
+          @each(a in u.addresses)
+          <td scope="row" class="align-middle">
             <table class="table">
               <tr>{{a.block}} {{a.street}}
-                <br><br>
+                <br>
                 {{a.floor}} - {{a.unit}}
-                <br><br>
+                <br>
                 {{a.building}}
-                <br><br>
+                <br>
                 {{a.postal_code}}
               </tr>
-        </tr>
-      </table>
-    </td>
-    @endeach
-
+            </table>
+          </td>
+          @endeach
+          <td scope="row" class="align-middle">
+            <a href="{{ route('deleteUser', {id:u.id}) }}">
+              <button class="btn btn-danger btn-block">Del</button>
+            </a>
+          </td>
+      </tr>
+    </tbody>
       @endeach
-      </tbody>
     </table>
   </div>
 

@@ -124,6 +124,13 @@ class UserController {
     await newUser.addresses().attach(newAddress.id)
     return response.route('newuserlist')
   }
+
+  async deleteUser({params, response, session}){
+    let user = await User.find(params.id)
+    session.flash({ warning: `User ${user.email} has been deleted!` });
+    await user.delete()
+    response.route('newuserlist')
+  }
 }
 
 module.exports = UserController

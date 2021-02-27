@@ -35,10 +35,14 @@ Route.group( () => {
 Route.get('/users', 'UserController.index').as('users').middleware('auth:admin')
 
 //create user
-Route.get('/users-api', 'UserController.index')
+Route.get('/users-api', 'UserController.indexAPI')
 Route.get('/users', 'UserController.adminIndex').as('newuserlist').middleware('auth:admin')
 Route.get('/users/create', 'UserController.createUser').as('userscreateview').middleware('auth:admin')
 Route.post('/users/create', 'UserController.processCreate').as('processCreate').middleware('auth:admin')
+
+
+Route.get('/users/delete/:id', 'UserController.deleteUser').as('deleteUser').middleware('auth:admin')
+
 
 // product routes
 Route.get('products', 'ProductController.index').as('productshome').middleware('auth:admin')
