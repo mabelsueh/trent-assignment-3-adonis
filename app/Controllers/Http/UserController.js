@@ -127,7 +127,8 @@ class UserController {
 
   async deleteUser({params, response, session}){
     let user = await User.find(params.id)
-    session.flash({ warning: `User ${user.email} has been deleted!` });
+    session.flash({ warning: `User ${user.email} has been deleted!` })
+    await user.addresses().detach()
     await user.delete()
     response.route('newuserlist')
   }
