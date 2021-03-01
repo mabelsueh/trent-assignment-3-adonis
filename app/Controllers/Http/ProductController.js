@@ -5,6 +5,12 @@ const Product = use('App/Models/Product')
 const Config = use('Config')
 
 class ProductController {
+  // for R in api
+  async indexAPI({response}){
+    let user = await Product.all()
+    response.json(user)
+  }
+
   async index({ view }) {
     const products = await Product.all()
 
