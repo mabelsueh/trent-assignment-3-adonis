@@ -29,8 +29,8 @@ class ProductController {
 
   async processCreateProduct({response, request, session}){
     const rules = {
-      product_name:'required',
-      sku:'required',
+      product_name:'required|unique:products,product_name',
+      sku:'required|unique:products:sku',
       description:'required',
       price:'required',
       imgurl:'required'
@@ -38,7 +38,9 @@ class ProductController {
 
     const messages = {
      'product_name.required':'Please enter Name',
+     'product_name.unique':'Product name already exists',
      'sku.required':'Please enter SKU',
+     'sku.unique':'SKU already exists. Please enter a unique SKU',
      'description.required':'Description cannot be empty',
      'price.required':'Please enter a price',
      'imgurl.required':'Please provide image'

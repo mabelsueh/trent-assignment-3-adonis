@@ -63,7 +63,7 @@ Create Product
         >
         <a href='#' class="btn btn-info mt-3" id="upload_widget">Upload Image</a>
         <input type="hidden" name="imgurl" id="imgurl" value="{{old('imgurl')}}"/>
-        <img src="" id="uploaded_image" style="display:none" height="200px" value="{{old('imgurl')}}"/>
+        <img src="" class="mt-5" id="uploaded_image" style="display:none" height="200px" value="{{old('imgurl')}}"/>
         {{ elIf('<div class="invalid-feedback" style="display:block">$self</div>', getErrorFor('imgurl'), hasErrorFor('imgurl')) }}
       </div>
     <button type="submit" class="btn btn-primary mt-5">Submit</button>
