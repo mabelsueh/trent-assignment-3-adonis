@@ -7,8 +7,8 @@ const Config = use('Config')
 class ProductController {
   // for R in api
   async indexAPI({response}){
-    let user = await Product.all()
-    response.json(user)
+    let products = await Product.all()
+    response.json(products)
   }
 
   async index({ view }) {
